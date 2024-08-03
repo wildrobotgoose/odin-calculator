@@ -54,7 +54,7 @@ function respondToOperator(op) {
             break;
         case STATE_OPERAND_2:
             operand2 = displayValue;
-            displayValue = performOperation();
+            displayValue = operate();
             operand1 = displayValue;
             operand2 = null;
             operator = op;
@@ -73,7 +73,7 @@ function respondToEqual() {
 
     if (state == STATE_OPERAND_2) {
         operand2 = displayValue;
-        displayValue = performOperation();
+        displayValue = operate();
     }
     operand1 = null;
     operand2 = null;
@@ -104,7 +104,7 @@ function displayResult() {
     }
 }
 
-function performOperation() {
+function operate() {
     switch (operator) {
         case OP_ADD:
             return operand1 + operand2;
