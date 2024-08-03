@@ -8,7 +8,7 @@ const OP_SUBTRACT = 1;
 const OP_MULTIPLY = 2;
 const OP_DIVIDE = 3;
 
-const MAX_DISPLAY = 15;  // Maximum number of digits to display
+const MAX_DISPLAY = 15;  // Maximum number of characters to display
 
 let state = STATE_START;
 let displayValue = 0;
@@ -91,7 +91,8 @@ function displayResult() {
         display.textContent = "Value too large";
     }
     else {
-        display.textContent = displayValue;
+        display.textContent = displayValue.toString()
+                                          .substring(0, MAX_DISPLAY);
     }
 }
 
