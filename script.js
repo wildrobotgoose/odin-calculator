@@ -94,7 +94,11 @@ function respondToClear() {
 }
 
 function displayResult() {
-    if (Math.abs(displayValue) >= 10 ** MAX_DISPLAY) {
+    if (!Number.isFinite(displayValue)) {
+        display.textContent = "Invalid value";
+        state = STATE_ERROR;
+    }
+    else if (Math.abs(displayValue) >= 10 ** MAX_DISPLAY) {
         display.textContent = "Value too large";
         state = STATE_ERROR;
     }
