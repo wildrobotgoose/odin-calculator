@@ -8,6 +8,8 @@ const OP_SUBTRACT = 1;
 const OP_MULTIPLY = 2;
 const OP_DIVIDE = 3;
 
+const MAX_DISPLAY = 15;  // Maximum number of digits to display
+
 let state = STATE_START;
 let displayValue = 0;
 let operand1 = null;
@@ -33,7 +35,7 @@ function respondToDigit(digit) {
         default:
             console.log(`ERROR: Reached an invalid state ${state}.`);
     }
-    display.textContent = displayValue;
+    displayResult();
 }
 
 function respondToOperator(op) {
@@ -58,7 +60,7 @@ function respondToOperator(op) {
         default:
             console.log(`ERROR: Reached an invalid state ${state}.`);
     }
-    display.textContent = displayValue;
+    displayResult();
 }
 
 function respondToEqual() {
@@ -71,7 +73,7 @@ function respondToEqual() {
     operator = null;
     state = STATE_START;
 
-    display.textContent = displayValue;
+    displayResult();
 }
 
 function respondToClear() {
@@ -81,7 +83,16 @@ function respondToClear() {
     operator = null;
     state = STATE_START;
 
-    display.textContent = displayValue;
+    displayResult();
+}
+
+function displayResult() {
+    if (Math.abs(displayValue) >= 10 ** MAX_DISPLAY) {
+        display.textContent = "Value too large";
+    }
+    else {
+        display.textContent = displayValue;
+    }
 }
 
 function performOperation() {
