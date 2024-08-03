@@ -1,3 +1,4 @@
+const STATE_ERROR = -1;
 const STATE_START = 0;
 const STATE_OPERAND_1 = 1; // Operand 1 is being entered
 const STATE_OPERATOR = 2;  // Operand 1 and operator have been entered
@@ -32,6 +33,8 @@ function respondToDigit(digit) {
         case STATE_OPERAND_2:
             displayValue = 10 * displayValue + digit;
             break;
+        case STATE_ERROR:
+            break;
         default:
             console.log(`ERROR: Reached an invalid state ${state}.`);
     }
@@ -57,6 +60,8 @@ function respondToOperator(op) {
             operator = op;
             state = STATE_OPERATOR;
             break;
+        case STATE_ERROR:
+            break;
         default:
             console.log(`ERROR: Reached an invalid state ${state}.`);
     }
@@ -64,6 +69,8 @@ function respondToOperator(op) {
 }
 
 function respondToEqual() {
+    if (state == STATE_ERROR) return;
+
     if (state == STATE_OPERAND_2) {
         operand2 = displayValue;
         displayValue = performOperation();
@@ -89,6 +96,7 @@ function respondToClear() {
 function displayResult() {
     if (Math.abs(displayValue) >= 10 ** MAX_DISPLAY) {
         display.textContent = "Value too large";
+        state = STATE_ERROR;
     }
     else {
         display.textContent = displayValue.toString()
