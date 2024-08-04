@@ -18,6 +18,7 @@ let operand2 = null;
 let operator = null;
 
 const display = document.querySelector(".display");
+displayResult();
 
 function respondToDigit(digit) {
     switch (state) {
