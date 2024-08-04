@@ -146,3 +146,57 @@ document.querySelector(".button.equal")
 document.querySelector(".button.clear")
         .addEventListener("click", respondToClear);
 
+document.addEventListener("keypress", (e) => {
+    switch (e.key) {
+    case "0":
+        respondToDigit(0);
+        break;
+    case "1":
+        respondToDigit(1);
+        break;
+    case "2":
+        respondToDigit(2);
+        break;
+    case "3":
+        respondToDigit(3);
+        break;
+    case "4":
+        respondToDigit(4);
+        break;
+    case "5":
+        respondToDigit(5);
+        break;
+    case "6":
+        respondToDigit(6);
+        break;
+    case "7":
+        respondToDigit(7);
+        break;
+    case "8":
+        respondToDigit(8);
+        break;
+    case "9":
+        respondToDigit(9);
+        break;
+    case "+":
+        respondToOperator(OP_ADD);
+        break;
+    case "-":
+        respondToOperator(OP_SUBTRACT);
+        break;
+    case "*":
+        respondToOperator(OP_MULTIPLY);
+        break;
+    case "/":
+        respondToOperator(OP_DIVIDE);
+        break;
+    case "=":
+    case "Enter":
+        respondToEqual();
+        break;
+    case "c":
+    case "C":
+        respondToClear();
+        break;
+    }
+});
